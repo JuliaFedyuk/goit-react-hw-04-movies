@@ -1,13 +1,11 @@
 import { Component } from 'react';
 import axios from 'axios';
-// import { Link } from 'react-router-dom';
-// import routes from '../routes';
+import PropTypes from 'prop-types';
 import MovieList from '../components/MoviesList';
 
 class Homepage extends Component {
   state = {
     movies: [],
-    page: 1,
   };
 
   async componentDidMount() {
@@ -30,5 +28,9 @@ class Homepage extends Component {
     );
   }
 }
+
+Homepage.propTypes = {
+  movies: PropTypes.array,
+};
 
 export default Homepage;

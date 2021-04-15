@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import axios from 'axios';
+import '../Reviews/Reviews.scss';
 
 class Reviews extends Component {
   state = {
@@ -19,7 +20,7 @@ class Reviews extends Component {
   render() {
     const reviews = this.state.reviews;
     return (
-      <ul>
+      <ul className="reviews-wrapper">
         {reviews.length > 0
           ? reviews.map(review => (
               <li key={review.id}>

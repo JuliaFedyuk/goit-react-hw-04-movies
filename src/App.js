@@ -1,8 +1,6 @@
-import React, { Suspence, lazy } from 'react';
+import React, { Suspense, lazy } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import AppBar from './components/AppBar';
-import Loader from './components/Loader';
-// import Container from './components/Container';
 import routes from './routes';
 import './styles/base.scss';
 
@@ -23,7 +21,7 @@ const App = () => {
     <>
       <AppBar />
 
-      <Suspence fallback={Loader}>
+      <Suspense fallback={<h2>Loading...</h2>}>
         <Switch>
           <Route exact path={routes.home} component={Homepage} />
           <Route
@@ -33,7 +31,7 @@ const App = () => {
           <Route path={routes.movies} component={MoviesPage} />
           <Route component={Homepage} />
         </Switch>
-      </Suspence>
+      </Suspense>
     </>
   );
 };

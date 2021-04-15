@@ -1,12 +1,14 @@
 import { Component } from 'react';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 import { NavLink, Route } from 'react-router-dom';
-import Cast from './Cast';
-import Reviews from './Reviews';
+import Cast from '../components/Cast/Cast';
+import Reviews from '../components/Reviews';
 import routes from '../routes';
 import MovieDescr from '../components/MovieDescr';
 import arrow from '../images/arrow-left2.png';
 import Container from '../components/Container';
+import '../styles/base.scss';
 
 class MoviesDetailsPage extends Component {
   state = {
@@ -42,7 +44,7 @@ class MoviesDetailsPage extends Component {
   render() {
     const { poster_path, title, vote_average, overview, id } = this.state.movie;
     const date = this.state.date;
-    const { match } = this.props;
+    const { match, location } = this.props;
     const genres = this.state.genres;
 
     return (
@@ -69,28 +71,52 @@ class MoviesDetailsPage extends Component {
           overview={overview}
           genres={genres}
         />
-        <h2>Additional information</h2>
-        <ul>
-          <li>
-            <NavLink to={`${match.url}${routes.cast}`}>Cast</NavLink>
-          </li>
-          <li>
-            <NavLink to={`${match.url}${routes.reviews}`}>Reviews</NavLink>
-          </li>
-        </ul>
-        <Route
-          exact
-          path={`${match.path}/cast`}
-          render={props => <Cast {...props} movieId={id} />}
-        />
-        <Route
-          exact
-          path={`${match.path}/reviews`}
-          render={props => <Reviews {...props} movieId={id} />}
-        />
+        <Container>
+          <h2 className="additional-info-title">Additional information</h2>
+          <ul className="additional-links">
+            <li>
+              <NavLink
+                className="cast-link"
+                to={{
+                  pathname: `${match.url}${routes.cast}`,
+                  state: { from: location?.state?.from },
+                }}
+              >
+                Cast
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                className="reviews-link"
+                to={{
+                  pathname: `${match.url}${routes.reviews}`,
+                  state: { from: location?.state?.from },
+                }}
+              >
+                Reviews
+              </NavLink>
+            </li>
+          </ul>
+          <Route
+            exact
+            path={`${match.path}/cast`}
+            render={props => <Cast {...props} movieId={id} />}
+          />
+          <Route
+            exact
+            path={`${match.path}/reviews`}
+            render={props => <Reviews {...props} movieId={id} />}
+          />
+        </Container>
       </>
     );
   }
 }
+
+MoviesDetailsPage.propTypes = {
+  movie: PropTypes.object,
+  genres: PropTypes.array,
+  date: PropTypes.string,
+};
 
 export default MoviesDetailsPage;

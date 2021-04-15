@@ -1,4 +1,5 @@
 import { Link, withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import routes from '../../routes';
 import './MovieList.scss';
 
@@ -19,6 +20,11 @@ const MoviesList = ({ movies, location }) => {
       ))}
     </ul>
   );
+};
+
+MoviesList.propTypes = {
+  movies: PropTypes.array,
+  location: PropTypes.object,
 };
 
 export default withRouter(MoviesList);
