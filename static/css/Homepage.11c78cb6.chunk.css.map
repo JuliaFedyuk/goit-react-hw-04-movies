@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack://src/components/MoviesList/MovieList.scss"],"names":[],"mappings":"AAAA,0BAEE,UAAA,CACA,eAAA","file":"Homepage.11c78cb6.chunk.css","sourcesContent":[".movie-link,\n.movie-link a {\n  color: yellow;\n  line-height: 1.5;\n}\n"]}

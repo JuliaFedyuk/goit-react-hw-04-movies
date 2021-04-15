@@ -1,0 +1,35 @@
+{
+  "files": {
+    "static/js/0.1335817d.chunk.js": "/goit-react-hw-04-movies/static/js/0.1335817d.chunk.js",
+    "static/js/0.1335817d.chunk.js.map": "/goit-react-hw-04-movies/static/js/0.1335817d.chunk.js.map",
+    "Homepage.css": "/goit-react-hw-04-movies/static/css/Homepage.11c78cb6.chunk.css",
+    "Homepage.js": "/goit-react-hw-04-movies/static/js/Homepage.6a4bde2f.chunk.js",
+    "Homepage.js.map": "/goit-react-hw-04-movies/static/js/Homepage.6a4bde2f.chunk.js.map",
+    "MoviesDetailsPage.css": "/goit-react-hw-04-movies/static/css/MoviesDetailsPage.30b0d923.chunk.css",
+    "MoviesDetailsPage.js": "/goit-react-hw-04-movies/static/js/MoviesDetailsPage.eb3fa963.chunk.js",
+    "MoviesDetailsPage.js.map": "/goit-react-hw-04-movies/static/js/MoviesDetailsPage.eb3fa963.chunk.js.map",
+    "MoviesPage.css": "/goit-react-hw-04-movies/static/css/MoviesPage.fc024245.chunk.css",
+    "MoviesPage.js": "/goit-react-hw-04-movies/static/js/MoviesPage.5dcf1748.chunk.js",
+    "MoviesPage.js.map": "/goit-react-hw-04-movies/static/js/MoviesPage.5dcf1748.chunk.js.map",
+    "main.css": "/goit-react-hw-04-movies/static/css/main.ad9f41d4.chunk.css",
+    "main.js": "/goit-react-hw-04-movies/static/js/main.6d7682c5.chunk.js",
+    "main.js.map": "/goit-react-hw-04-movies/static/js/main.6d7682c5.chunk.js.map",
+    "runtime-main.js": "/goit-react-hw-04-movies/static/js/runtime-main.4cc2e960.js",
+    "runtime-main.js.map": "/goit-react-hw-04-movies/static/js/runtime-main.4cc2e960.js.map",
+    "static/js/6.b9cb3a3b.chunk.js": "/goit-react-hw-04-movies/static/js/6.b9cb3a3b.chunk.js",
+    "static/js/6.b9cb3a3b.chunk.js.map": "/goit-react-hw-04-movies/static/js/6.b9cb3a3b.chunk.js.map",
+    "index.html": "/goit-react-hw-04-movies/index.html",
+    "static/css/Homepage.11c78cb6.chunk.css.map": "/goit-react-hw-04-movies/static/css/Homepage.11c78cb6.chunk.css.map",
+    "static/css/MoviesDetailsPage.30b0d923.chunk.css.map": "/goit-react-hw-04-movies/static/css/MoviesDetailsPage.30b0d923.chunk.css.map",
+    "static/css/MoviesPage.fc024245.chunk.css.map": "/goit-react-hw-04-movies/static/css/MoviesPage.fc024245.chunk.css.map",
+    "static/css/main.ad9f41d4.chunk.css.map": "/goit-react-hw-04-movies/static/css/main.ad9f41d4.chunk.css.map",
+    "static/js/6.b9cb3a3b.chunk.js.LICENSE.txt": "/goit-react-hw-04-movies/static/js/6.b9cb3a3b.chunk.js.LICENSE.txt",
+    "static/media/base.scss": "/goit-react-hw-04-movies/static/media/15-155717_16mm-film-reel-photos-background-wallpaper-film.0490154d.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.4cc2e960.js",
+    "static/js/6.b9cb3a3b.chunk.js",
+    "static/css/main.ad9f41d4.chunk.css",
+    "static/js/main.6d7682c5.chunk.js"
+  ]
+}
