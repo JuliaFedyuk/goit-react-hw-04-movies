@@ -6,8 +6,8 @@ import Cast from '../components/Cast/Cast';
 import Reviews from '../components/Reviews';
 import routes from '../routes';
 import MovieDescr from '../components/MovieDescr';
-import arrow from '../images/arrow-left2.png';
 import Container from '../components/Container';
+import GoBackButton from '../components/GoBackButton';
 import '../styles/base.scss';
 
 class MoviesDetailsPage extends Component {
@@ -49,20 +49,7 @@ class MoviesDetailsPage extends Component {
 
     return (
       <>
-        <button
-          type="button"
-          onClick={this.handleGoBack}
-          className="goback-button"
-        >
-          <img
-            src={arrow}
-            alt={arrow}
-            width="18"
-            height="18"
-            className="arrow-img"
-          />
-          Go back
-        </button>
+        <GoBackButton onClick={this.handleGoBack} />
         <MovieDescr
           poster_path={poster_path}
           title={title}
