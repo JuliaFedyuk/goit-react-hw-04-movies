@@ -1,12 +1,10 @@
 import { Component } from 'react';
-import axios from 'axios';
 import queryString from 'query-string';
 import PropTypes from 'prop-types';
 import Searchbar from '../components/SearchBar/SearchBar';
 import MoviesList from '../components/MoviesList/MovieList';
 import Loader from '../components/Loader';
-
-const apiKey = '62a9ccac1046b7fcbbfc478d026ca990';
+import services from '../services/ApiService';
 
 class MoviesPage extends Component {
   state = {
@@ -20,19 +18,17 @@ class MoviesPage extends Component {
     const queryParams = queryString.parse(this.props.location.search);
     this.setState({ isLoading: true });
     if (queryParams?.query) {
-      axios
-        .get(
-          `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&include_adult=false&query=${queryParams.query}`,
-        )
-        .then(response => this.setState({ movies: response.data.results }));
+      services
+        .FetchMoviesWithQuery(queryParams.query)
+        .then(movies => this.setState({ movies }))
+        .catch(error => this.setState({ error }))
+        .finally(() => this.setState({ isLoading: false }));
     }
   }
   onChangeQuery = query => {
-    axios
-      .get(
-        `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&include_adult=false&query=${query}`,
-      )
-      .then(response => this.setState({ movies: response.data.results }))
+    services
+      .FetchMoviesWithQuery(query)
+      .then(movies => this.setState({ movies }))
       .catch(error => this.setState({ error }))
       .finally(() => this.setState({ isLoading: false }));
   };

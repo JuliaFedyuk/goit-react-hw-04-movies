@@ -1,21 +1,22 @@
 import { Component } from 'react';
-import axios from 'axios';
 import Container from '../Container/Container';
+import services from '../../services/ApiService';
 import './Cast.scss';
 
 class Cast extends Component {
   state = {
     cast: [],
+    error: null,
   };
 
-  async componentDidMount() {
-    const apiKey = '62a9ccac1046b7fcbbfc478d026ca990';
-
-    const response = await axios.get(
-      `https://api.themoviedb.org/3/movie/${this.props.movieId}/credits?api_key=${apiKey}`,
-    );
-
-    this.setState({ cast: response.data.cast });
+  componentDidMount() {
+    const { movieId } = this.props.match.params;
+    this.setState({ isLoading: true });
+    services
+      .FetchMovieCast(movieId)
+      .then(cast => this.setState({ cast }))
+      .catch(error => this.setState({ error }))
+      .finally(() => this.setState({ isLoading: false }));
   }
 
   render() {

@@ -1,28 +1,31 @@
 import { Component } from 'react';
-import axios from 'axios';
 import PropTypes from 'prop-types';
 import MovieList from '../components/MoviesList';
+import services from '../services/ApiService';
+import Loader from '../components/Loader';
 
 class Homepage extends Component {
   state = {
     movies: [],
+    isLoading: false,
   };
 
-  async componentDidMount() {
-    const apiKey = '62a9ccac1046b7fcbbfc478d026ca990';
-    const response = await axios.get(
-      `https://api.themoviedb.org/3/trending/movie/day?api_key=${apiKey}`,
-    );
-
-    this.setState({ movies: response.data.results });
+  componentDidMount() {
+    this.setState({ isLoading: true });
+    services
+      .FetchTrendingMovie()
+      .then(movies => this.setState({ movies }))
+      .catch(error => this.setState({ error }))
+      .finally(() => this.setState({ isLoading: false }));
   }
 
   render() {
-    const movies = this.state.movies;
+    const { movies, isLoading } = this.state;
 
     return (
       <>
         <h1 className="main-title">Tranding today</h1>
+        {isLoading && <Loader />}
         <MovieList movies={movies} />
       </>
     );

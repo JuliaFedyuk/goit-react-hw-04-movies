@@ -1,34 +1,48 @@
+import React, { Suspense, lazy } from 'react';
 import { Component } from 'react';
-import axios from 'axios';
 import PropTypes from 'prop-types';
 import { NavLink, Route } from 'react-router-dom';
-import Cast from '../components/Cast/Cast';
-import Reviews from '../components/Reviews';
 import routes from '../routes';
 import MovieDescr from '../components/MovieDescr';
 import Container from '../components/Container';
 import GoBackButton from '../components/GoBackButton';
+import Loader from '../components/Loader';
+import services from '../services/ApiService';
 import '../styles/base.scss';
+
+const Cast = lazy(() =>
+  import('../components/Cast/Cast' /* webpackChunkName: "Cast" */),
+);
+const Reviews = lazy(() =>
+  import('../components/Reviews' /* webpackChunkName: "Reviews" */),
+);
 
 class MoviesDetailsPage extends Component {
   state = {
     movie: {},
     genres: [],
     date: '',
+    isLoading: false,
   };
 
   async componentDidMount() {
-    const apiKey = '62a9ccac1046b7fcbbfc478d026ca990';
+    this.setState({ isLoading: true });
+
     const { movieId } = this.props.match.params;
 
-    const response = await axios.get(
-      `https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}`,
-    );
-
-    this.setState({ movie: response.data });
+    await services
+      .FetchMovieDetails(movieId)
+      .then(movie =>
+        this.setState({
+          movie: movie,
+          genres: movie.genres,
+          date: movie.release_date,
+        }),
+      )
+      .catch(error => this.setState({ error }))
+      .finally(() => this.setState({ isLoading: false }));
 
     const getGenresNames = array => array.map(({ name }) => name);
-
     this.setState({ genres: getGenresNames(this.state.movie.genres) });
 
     const getDate = this.state.movie.release_date.substr(0, 4);
@@ -45,11 +59,12 @@ class MoviesDetailsPage extends Component {
     const { poster_path, title, vote_average, overview, id } = this.state.movie;
     const date = this.state.date;
     const { match, location } = this.props;
-    const genres = this.state.genres;
+    const { genres, isLoading } = this.state;
 
     return (
       <>
         <GoBackButton onClick={this.handleGoBack} />
+        {isLoading && <Loader />}
         <MovieDescr
           poster_path={poster_path}
           title={title}
@@ -84,16 +99,18 @@ class MoviesDetailsPage extends Component {
               </NavLink>
             </li>
           </ul>
-          <Route
-            exact
-            path={`${match.path}/cast`}
-            render={props => <Cast {...props} movieId={id} />}
-          />
-          <Route
-            exact
-            path={`${match.path}/reviews`}
-            render={props => <Reviews {...props} movieId={id} />}
-          />
+          <Suspense fallback={<h2>Loading...</h2>}>
+            <Route
+              exact
+              path={`${match.path}/cast`}
+              render={props => <Cast {...props} movieId={id} />}
+            />
+            <Route
+              exact
+              path={`${match.path}/reviews`}
+              render={props => <Reviews {...props} movieId={id} />}
+            />
+          </Suspense>
         </Container>
       </>
     );
